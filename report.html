@@ -13534,7 +13534,7 @@ There are 8351 total dog images.
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>- Dogs detected in human files: 0.0%
+<pre>- Dogs detected in human files: 1.0%
 - Dogs detected in dog files: 100.0%
 </pre>
 </div>
@@ -13653,13 +13653,15 @@ There are 8351 total dog images.
 <span class="n">num_workers</span> <span class="o">=</span> <span class="mi">8</span>
 <span class="n">pin_memory</span> <span class="o">=</span> <span class="n">use_cuda</span>
 
+<span class="n">data_sets</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">data_sets</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">ImageFolder</span><span class="p">(</span><span class="s1">&#39;data/dog_images/train&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">train_transforms</span><span class="p">)</span>
+<span class="n">data_sets</span><span class="p">[</span><span class="s1">&#39;valid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">ImageFolder</span><span class="p">(</span><span class="s1">&#39;data/dog_images/valid&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">eval_transforms</span><span class="p">)</span>
+<span class="n">data_sets</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">ImageFolder</span><span class="p">(</span><span class="s1">&#39;data/dog_images/test&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">eval_transforms</span><span class="p">)</span>
+
 <span class="n">loaders_scratch</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">loaders_scratch</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">datasets</span><span class="o">.</span><span class="n">ImageFolder</span><span class="p">(</span><span class="s1">&#39;data/dog_images/train&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">train_transforms</span><span class="p">),</span> 
-                                      <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">pin_memory</span><span class="o">=</span><span class="n">pin_memory</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">)</span>
-<span class="n">loaders_scratch</span><span class="p">[</span><span class="s1">&#39;valid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">datasets</span><span class="o">.</span><span class="n">ImageFolder</span><span class="p">(</span><span class="s1">&#39;data/dog_images/valid&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">eval_transforms</span><span class="p">),</span> 
-                                      <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">pin_memory</span><span class="o">=</span><span class="n">pin_memory</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">)</span>
-<span class="n">loaders_scratch</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">datasets</span><span class="o">.</span><span class="n">ImageFolder</span><span class="p">(</span><span class="s1">&#39;data/dog_images/test&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">eval_transforms</span><span class="p">),</span> 
-                                     <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">pin_memory</span><span class="o">=</span><span class="n">pin_memory</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">)</span>
+<span class="n">loaders_scratch</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">data_sets</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">],</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">pin_memory</span><span class="o">=</span><span class="n">pin_memory</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">)</span>
+<span class="n">loaders_scratch</span><span class="p">[</span><span class="s1">&#39;valid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">data_sets</span><span class="p">[</span><span class="s1">&#39;valid&#39;</span><span class="p">],</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">pin_memory</span><span class="o">=</span><span class="n">pin_memory</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">)</span>
+<span class="n">loaders_scratch</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">data_sets</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">],</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">pin_memory</span><span class="o">=</span><span class="n">pin_memory</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14199,7 +14201,7 @@ Epoch: 100 	Training Loss: 0.072744 	Validation Loss: 1.614155
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># load the model that got the best validation accuracy</span>
@@ -14216,7 +14218,7 @@ Epoch: 100 	Training Loss: 0.072744 	Validation Loss: 1.614155
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[15]:</div>
+    <div class="prompt output_prompt">Out[35]:</div>
 
 
 
@@ -14241,7 +14243,7 @@ Epoch: 100 	Training Loss: 0.072744 	Validation Loss: 1.614155
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">loaders</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">criterion</span><span class="p">,</span> <span class="n">use_cuda</span><span class="p">):</span>
@@ -14273,8 +14275,19 @@ Epoch: 100 	Training Loss: 0.072744 	Validation Loss: 1.614155
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Test Accuracy: </span><span class="si">%2d%%</span><span class="s1"> (</span><span class="si">%2d</span><span class="s1">/</span><span class="si">%2d</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span>
         <span class="mf">100.</span> <span class="o">*</span> <span class="n">correct</span> <span class="o">/</span> <span class="n">total</span><span class="p">,</span> <span class="n">correct</span><span class="p">,</span> <span class="n">total</span><span class="p">))</span>
+</pre></div>
 
-<span class="c1"># call test function    </span>
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># call test function    </span>
 <span class="n">test</span><span class="p">(</span><span class="n">loaders_scratch</span><span class="p">,</span> <span class="n">model_scratch</span><span class="p">,</span> <span class="n">criterion_scratch</span><span class="p">,</span> <span class="n">use_cuda</span><span class="p">)</span>
 </pre></div>
 
@@ -14331,23 +14344,14 @@ Test Accuracy: 63% (532/836)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## TODO: Specify data loaders</span>
-<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="n">num_workers</span> <span class="o">=</span> <span class="mi">8</span>
-<span class="n">pin_memory</span> <span class="o">=</span> <span class="n">use_cuda</span>
-
-<span class="n">data_transfer</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">data_transfer</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">ImageFolder</span><span class="p">(</span><span class="s1">&#39;data/dog_images/train&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">train_transforms</span><span class="p">)</span>
-<span class="n">data_transfer</span><span class="p">[</span><span class="s1">&#39;valid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">ImageFolder</span><span class="p">(</span><span class="s1">&#39;data/dog_images/valid&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">eval_transforms</span><span class="p">)</span>
-<span class="n">data_transfer</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">ImageFolder</span><span class="p">(</span><span class="s1">&#39;data/dog_images/test&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">eval_transforms</span><span class="p">)</span>
-
 <span class="n">loaders_transfer</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">loaders_transfer</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">data_transfer</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">],</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">pin_memory</span><span class="o">=</span><span class="n">pin_memory</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">)</span>
-<span class="n">loaders_transfer</span><span class="p">[</span><span class="s1">&#39;valid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">data_transfer</span><span class="p">[</span><span class="s1">&#39;valid&#39;</span><span class="p">],</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">pin_memory</span><span class="o">=</span><span class="n">pin_memory</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">)</span>
-<span class="n">loaders_transfer</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">data_transfer</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">],</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">pin_memory</span><span class="o">=</span><span class="n">pin_memory</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">)</span>
+<span class="n">loaders_transfer</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">data_sets</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">],</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">pin_memory</span><span class="o">=</span><span class="n">pin_memory</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">)</span>
+<span class="n">loaders_transfer</span><span class="p">[</span><span class="s1">&#39;valid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">data_sets</span><span class="p">[</span><span class="s1">&#39;valid&#39;</span><span class="p">],</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">pin_memory</span><span class="o">=</span><span class="n">pin_memory</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">)</span>
+<span class="n">loaders_transfer</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">data_sets</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">],</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">pin_memory</span><span class="o">=</span><span class="n">pin_memory</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14365,18 +14369,24 @@ Test Accuracy: 63% (532/836)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">torchvision.models</span> <span class="k">as</span> <span class="nn">models</span>
 <span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
 
 <span class="c1">## TODO: Specify model architecture </span>
-<span class="n">model_transfer</span> <span class="o">=</span> <span class="n">Net</span><span class="p">()</span>
-<span class="n">model_transfer</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;model_scratch.pt&#39;</span><span class="p">))</span> <span class="c1"># loading best model </span>
+<span class="n">model_transfer</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">resnet50</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model_transfer</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
-    <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">block_expansion</span> <span class="o">=</span> <span class="mi">4</span> 
+<span class="n">num_classes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_sets</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">classes</span><span class="p">)</span> <span class="c1"># equal to 133</span>
+<span class="n">model_transfer</span><span class="o">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">512</span> <span class="o">*</span> <span class="n">block_expansion</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">block</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;conv1&#39;</span><span class="p">,</span> <span class="s1">&#39;bn1&#39;</span><span class="p">,</span> <span class="s1">&#39;layer1&#39;</span><span class="p">,</span> <span class="s1">&#39;layer2&#39;</span><span class="p">,</span> <span class="s1">&#39;layer3&#39;</span><span class="p">,</span> <span class="s1">&#39;layer4&#39;</span><span class="p">]:</span>
+    <span class="n">model_block</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">model_transfer</span><span class="p">,</span> <span class="n">block</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">model_block</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model_block</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="k">if</span> <span class="n">use_cuda</span><span class="p">:</span>
     <span class="n">model_transfer</span> <span class="o">=</span> <span class="n">model_transfer</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
@@ -14421,12 +14431,12 @@ Test Accuracy: 63% (532/836)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">criterion_transfer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
-<span class="n">optimizer_transfer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model_transfer</span><span class="o">.</span><span class="n">classifier</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
-<span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">optimizer_transfer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model_transfer</span><span class="o">.</span><span class="n">fc</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+<span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">35</span>
 </pre></div>
 
     </div>
@@ -14444,7 +14454,7 @@ Test Accuracy: 63% (532/836)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># train the model</span>
@@ -14465,26 +14475,41 @@ Test Accuracy: 63% (532/836)
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Epoch: 1 	Training Loss: 0.069038 	Validation Loss: 1.500970
-Epoch: 2 	Training Loss: 0.064069 	Validation Loss: 1.493910
-Epoch: 3 	Training Loss: 0.065875 	Validation Loss: 1.477288
-Epoch: 4 	Training Loss: 0.067524 	Validation Loss: 1.481510
-Epoch: 5 	Training Loss: 0.063728 	Validation Loss: 1.479364
-Epoch: 6 	Training Loss: 0.063492 	Validation Loss: 1.482977
-Epoch: 7 	Training Loss: 0.062995 	Validation Loss: 1.493333
-Epoch: 8 	Training Loss: 0.061237 	Validation Loss: 1.466162
-Epoch: 9 	Training Loss: 0.058570 	Validation Loss: 1.515787
-Epoch: 10 	Training Loss: 0.058130 	Validation Loss: 1.450691
-Epoch: 11 	Training Loss: 0.064306 	Validation Loss: 1.480492
-Epoch: 12 	Training Loss: 0.054488 	Validation Loss: 1.474508
-Epoch: 13 	Training Loss: 0.061283 	Validation Loss: 1.447831
-Epoch: 14 	Training Loss: 0.063543 	Validation Loss: 1.466518
-Epoch: 15 	Training Loss: 0.055188 	Validation Loss: 1.466743
-Epoch: 16 	Training Loss: 0.058836 	Validation Loss: 1.471870
-Epoch: 17 	Training Loss: 0.055997 	Validation Loss: 1.469665
-Epoch: 18 	Training Loss: 0.058861 	Validation Loss: 1.470960
-Epoch: 19 	Training Loss: 0.055322 	Validation Loss: 1.468488
-Epoch: 20 	Training Loss: 0.052189 	Validation Loss: 1.469951
+<pre>Epoch: 1 	Training Loss: 4.327442 	Validation Loss: 3.589745
+Epoch: 2 	Training Loss: 3.189360 	Validation Loss: 2.636419
+Epoch: 3 	Training Loss: 2.420123 	Validation Loss: 2.002619
+Epoch: 4 	Training Loss: 1.914043 	Validation Loss: 1.633526
+Epoch: 5 	Training Loss: 1.593689 	Validation Loss: 1.352451
+Epoch: 6 	Training Loss: 1.377191 	Validation Loss: 1.175282
+Epoch: 7 	Training Loss: 1.218047 	Validation Loss: 1.047059
+Epoch: 8 	Training Loss: 1.103483 	Validation Loss: 0.952021
+Epoch: 9 	Training Loss: 1.010619 	Validation Loss: 0.868374
+Epoch: 10 	Training Loss: 0.929959 	Validation Loss: 0.827184
+Epoch: 11 	Training Loss: 0.875306 	Validation Loss: 0.782680
+Epoch: 12 	Training Loss: 0.814328 	Validation Loss: 0.731140
+Epoch: 13 	Training Loss: 0.781264 	Validation Loss: 0.698812
+Epoch: 14 	Training Loss: 0.754559 	Validation Loss: 0.680782
+Epoch: 15 	Training Loss: 0.716583 	Validation Loss: 0.660049
+Epoch: 16 	Training Loss: 0.697381 	Validation Loss: 0.636287
+Epoch: 17 	Training Loss: 0.661516 	Validation Loss: 0.612785
+Epoch: 18 	Training Loss: 0.638792 	Validation Loss: 0.603761
+Epoch: 19 	Training Loss: 0.621916 	Validation Loss: 0.589851
+Epoch: 20 	Training Loss: 0.603738 	Validation Loss: 0.564397
+Epoch: 21 	Training Loss: 0.589859 	Validation Loss: 0.554438
+Epoch: 22 	Training Loss: 0.568461 	Validation Loss: 0.549463
+Epoch: 23 	Training Loss: 0.560577 	Validation Loss: 0.537684
+Epoch: 24 	Training Loss: 0.547700 	Validation Loss: 0.525623
+Epoch: 25 	Training Loss: 0.529951 	Validation Loss: 0.524984
+Epoch: 26 	Training Loss: 0.528679 	Validation Loss: 0.510975
+Epoch: 27 	Training Loss: 0.511116 	Validation Loss: 0.493159
+Epoch: 28 	Training Loss: 0.499902 	Validation Loss: 0.496403
+Epoch: 29 	Training Loss: 0.488564 	Validation Loss: 0.489441
+Epoch: 30 	Training Loss: 0.485378 	Validation Loss: 0.488966
+Epoch: 31 	Training Loss: 0.485646 	Validation Loss: 0.484401
+Epoch: 32 	Training Loss: 0.461563 	Validation Loss: 0.485736
+Epoch: 33 	Training Loss: 0.459489 	Validation Loss: 0.469745
+Epoch: 34 	Training Loss: 0.449529 	Validation Loss: 0.466389
+Epoch: 35 	Training Loss: 0.443453 	Validation Loss: 0.460761
 </pre>
 </div>
 </div>
@@ -14495,7 +14520,7 @@ Epoch: 20 	Training Loss: 0.052189 	Validation Loss: 1.469951
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># load the model that got the best validation accuracy (uncomment the line below)</span>
@@ -14512,7 +14537,7 @@ Epoch: 20 	Training Loss: 0.052189 	Validation Loss: 1.469951
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[25]:</div>
+    <div class="prompt output_prompt">Out[21]:</div>
 
 
 
@@ -14537,7 +14562,7 @@ Epoch: 20 	Training Loss: 0.052189 	Validation Loss: 1.469951
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">test</span><span class="p">(</span><span class="n">loaders_transfer</span><span class="p">,</span> <span class="n">model_transfer</span><span class="p">,</span> <span class="n">criterion_transfer</span><span class="p">,</span> <span class="n">use_cuda</span><span class="p">)</span>
@@ -14557,10 +14582,10 @@ Epoch: 20 	Training Loss: 0.052189 	Validation Loss: 1.469951
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Test Loss: 1.435049
+<pre>Test Loss: 0.472669
 
 
-Test Accuracy: 64% (538/836)
+Test Accuracy: 89% (745/836)
 </pre>
 </div>
 </div>
@@ -14579,14 +14604,14 @@ Test Accuracy: 64% (538/836)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### TODO: Write a function that takes a path to an image as input</span>
 <span class="c1">### and returns the dog breed that is predicted by the model.</span>
 
 <span class="c1"># list of class names by index, i.e. a name can be accessed like class_names[0]</span>
-<span class="n">class_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data_transfer</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">classes</span><span class="p">]</span>
+<span class="n">class_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data_sets</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">classes</span><span class="p">]</span>
 
 <span class="k">def</span> <span class="nf">predict_breed_transfer</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
     <span class="c1"># load the image and return the predicted breed</span>
@@ -14630,7 +14655,7 @@ Test Accuracy: 64% (538/836)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### TODO: Write your algorithm.</span>
@@ -14682,15 +14707,15 @@ Test Accuracy: 64% (538/836)
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Initially I expect an improvement after the fine tunning of the model because the parameters corresponding to the classifier will be trained with a small value of learning rate, although the accuracy was 1% higher I expected a higher result. I think an improvement of the model would be add more parameters in the feature extractor because it is the most important part of the model, in there it learns all the contextual patterns in the images.</p>
-<p>Another improvement would be transform the images from RGB to Grayscale, however we would loose information about light by color channels. Finally another improvement would be take into account architectures with residual connections, like ResNet, in there we concatened convolutional maps with more semantic information which helps to preserve semantic information trought a deep network.</p>
+<p>Initially I expect an improvement after the fine tunning of the model because the parameters corresponding to the classifier will be trained with a small value of learning rate, although the accuracy was 1% higher I expected a higher result. I think an improvement of the model would be consider a model with more parameters in the feature extractor, in there it learns more complex patterns in the images.</p>
+<p>Another improvement would be transform the images from RGB to Grayscale, however we would loose information about light by color channels. Finally another improvement would be take into account architectures with fully connected residual connections, like DenseNet to get more semantic information in deeper layers.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## TODO: Execute your algorithm from Step 6 on</span>
@@ -14743,7 +14768,7 @@ Test Accuracy: 64% (538/836)
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>You look like a ...
-Dachshund
+French bulldog
 Hello human!
 </pre>
 </div>
@@ -14771,7 +14796,7 @@ Hello human!
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>You look like a ...
-German pinscher
+Poodle
 Hello human!
 </pre>
 </div>
@@ -14799,7 +14824,7 @@ Hello human!
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>You look like a ...
-Curly-coated retriever
+Dachshund
 Hello dog!
 </pre>
 </div>
